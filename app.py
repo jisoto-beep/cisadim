@@ -22,16 +22,7 @@ def get_sheet():
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
     creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
     client = gspread.authorize(creds)
-    sheet = client.open_by_key(SHEET_ID).sheet1
-    # Add headers if sheet is empty
-    if not sheet.get_all_values():
-        sheet.append_row([
-            "Referencia", "Fecha Envío", "Nombre", "Cargo", "Empresa",
-            "Correo", "Teléfono", "Fecha Trabajo", "Código Servicio",
-            "Tipo Servicio", "Instrumento", "Fecha Queja", "Naturaleza",
-            "Descripción", "Evidencia", "Acción", "Acción Otra"
-        ])
-    return sheet
+    return client.open_by_key(SHEET_ID).sheet1
 
 # ── DATABASE SETUP ──────────────────────────────────────────
 # This creates the cisadim.db file automatically if it doesn't exist
